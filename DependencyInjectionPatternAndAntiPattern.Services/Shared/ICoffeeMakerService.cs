@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DIPattern.Services.Shared
 {
-    public interface ICoffeeService
+    public interface ICoffeeMakerService
     {
-
-        List<Coffee> generateCoffee(int Count);
+        string makeSomeCoffee(Coffee coffee);
     }
 }

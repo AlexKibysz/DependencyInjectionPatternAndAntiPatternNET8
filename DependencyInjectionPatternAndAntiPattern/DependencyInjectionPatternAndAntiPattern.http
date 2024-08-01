@@ -1,6 +1,9 @@
 @DependencyInjectionPatternAndAntiPattern_HostAddress = http://localhost:5259
 
-GET {{DependencyInjectionPatternAndAntiPattern_HostAddress}}/weatherforecast/
+GET {{DependencyInjectionPatternAndAntiPattern_HostAddress}}/CoffeeMaker/5
 Accept: application/json
 
 ###
+
+GET {{DependencyInjectionPatternAndAntiPattern_HostAddress}}/CoffeeMaker/all
+Accept: application/json
