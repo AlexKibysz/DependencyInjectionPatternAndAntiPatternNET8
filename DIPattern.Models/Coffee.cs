@@ -7,7 +7,7 @@ namespace DIPattern.Models
     public class Coffee
     {
         [Key]
-        [Range(1, 5)]
+        [Range(1, 5, ErrorMessage = "Debe ser un valor entre 1 y 5")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio")]
@@ -40,4 +40,6 @@ namespace DIPattern.Models
         [Url(ErrorMessage = "Debe ser una URL válida")]
         public string Picture { get; set; } = string.Empty;
     }
+
+ 
 }
