@@ -15,7 +15,6 @@ namespace DIPattern.Controllers
 
         private readonly ICoffeeService _coffeeService;
 
-
         private readonly ICoffeeMakerService _coffeeMakerService;
 
 
@@ -31,15 +30,37 @@ namespace DIPattern.Controllers
         public async Task<ActionResult<IEnumerable<Coffee>>> Get()
 
         {
-            return Ok(_coffeeService.generateCoffee(20));
+            try
+            {
+                var coffees = await _coffeeService.GenerateCoffeesAsync();
+                return Ok(coffees);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener la lista de coffees");
+                return StatusCode(500, "Error interno del servidor");
+            }
         }
 
-        [HttpGet("{id}", Name = "GetMakeCoffee")]
-        public IActionResult MakeCoffeeByID(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<string>> MakeCoffeeByIdAsync(int id)
         {
-            List<Coffee> coffeeTypes = _coffeeService.generateCoffee(50);
-           
-            return Ok(_coffeeMakerService.makeSomeCoffee(coffeeTypes.SingleOrDefault(x => x.Id == id)));
+            try
+            {
+                var coffee = await _coffeeService.GetCoffeeByIdAsync(id);
+                if (coffee == null)
+                {
+                    return NotFound("Coffee no encontrado");
+                }
+
+                var result = await _coffeeMakerService.MakeSomeCoffeeAsync(coffee);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al preparar el coffee");
+                return StatusCode(500, "Error interno del servidor");
+            }
         }
 
     }
