@@ -9,6 +9,6 @@ namespace DIPattern.Services.Shared
 {
     public interface ICoffeeMakerService
     {
-        string makeSomeCoffee(Coffee coffee);
+        Task<string> MakeSomeCoffeeAsync(Coffee coffee);
     }
 }

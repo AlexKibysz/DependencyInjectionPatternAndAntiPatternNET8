@@ -10,6 +10,9 @@ namespace DIPattern.Services.Shared
     public interface ICoffeeService
     {
 
-        List<Coffee> generateCoffee(int Count);
+        Task<IEnumerable<Coffee>> GenerateCoffeesAsync();
+
+
+        Task<Coffee> GetCoffeeByIdAsync(int id);
     }
 }
