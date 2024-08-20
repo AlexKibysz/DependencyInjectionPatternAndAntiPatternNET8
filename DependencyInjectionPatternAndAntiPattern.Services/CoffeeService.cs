@@ -11,9 +11,7 @@ namespace DIPattern.Services
 {
     public class CoffeeService : ICoffeeService
     {
-        public List<Coffee> generateCoffee(int count)
-        {
-            return new List<Coffee>
+        private readonly List<Coffee> _coffees = new List<Coffee>
         {
             new Coffee
             {
@@ -72,6 +70,15 @@ namespace DIPattern.Services
             }
         };
 
+        public async Task<IEnumerable<Coffee>> GenerateCoffeesAsync()
+        {
+            return _coffees;
         }
+
+        public async Task<Coffee> GetCoffeeByIdAsync(int id)
+        {
+            return _coffees.SingleOrDefault(c => c.Id == id);
+        }
+
     }
 }
